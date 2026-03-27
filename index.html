@@ -4,30 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CreatorConnect</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  //fonts.googleapis.com">
+  //fonts.gstatic.com" crossorigin>
+  //fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f8fafc;
-      --surface:#ffffff;
+      --bg:#f7fbff;
+      --bg2:#eef6ff;
+      --surface:rgba(255,255,255,.72);
+      --surface-strong:#ffffff;
       --text:#0f172a;
       --muted:#64748b;
-      --line:#e2e8f0;
+      --line:#dbe7f5;
       --primary:#2563eb;
-      --primary2:#38bdf8;
-      --soft:#eff6ff;
-      --shadow:0 12px 30px rgba(15,23,42,.08);
-      --radius:22px;
-      --max:1180px;
+      --primary2:#7c3aed;
+      --accent:#06b6d4;
+      --shadow:0 18px 50px rgba(37,99,235,.10);
+      --shadow2:0 24px 70px rgba(124,58,237,.10);
+      --radius:24px;
+      --max:1200px;
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       font-family:'Inter',sans-serif;
-      background:linear-gradient(180deg,#f8fafc 0%, #eef6ff 100%);
       color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(124,58,237,.10), transparent 24%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      min-height:100vh;
+      overflow-x:hidden;
       line-height:1.6;
     }
 
@@ -37,41 +45,46 @@
       margin-inline:auto;
     }
 
+    .glass{
+      background:var(--surface);
+      border:1px solid rgba(219,231,245,.9);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+    }
+
     header{
       position:sticky;
       top:0;
       z-index:50;
-      background:rgba(248,250,252,.85);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(226,232,240,.8);
+      background:rgba(247,251,255,.7);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(219,231,245,.8);
     }
 
     .nav{
-      min-height:76px;
+      min-height:78px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
+      gap:16px;
     }
 
-    .logo{
+    .brand{
       display:flex;
       align-items:center;
       gap:12px;
       font-weight:800;
-      font-size:1.1rem;
+      letter-spacing:-.02em;
     }
 
-    .logo-box{
-      width:42px;
-      height:42px;
+    .brand-mark{
+      width:42px;height:42px;
       border-radius:14px;
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      display:grid;
-      place-items:center;
+      display:grid;place-items:center;
       color:white;
-      font-weight:800;
-      box-shadow:var(--shadow);
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 14px 30px rgba(37,99,235,.18);
     }
 
     nav ul{
@@ -83,36 +96,53 @@
     }
 
     nav a:hover{color:var(--primary)}
+
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:8px;
       padding:13px 20px;
       border-radius:14px;
       font-weight:700;
       transition:.25s ease;
       border:1px solid transparent;
+      cursor:pointer;
+      white-space:nowrap;
     }
+
     .btn-primary{
-      background:var(--primary);
       color:white;
-      box-shadow:0 10px 20px rgba(37,99,235,.18);
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 14px 26px rgba(37,99,235,.18);
     }
     .btn-primary:hover{transform:translateY(-2px)}
     .btn-secondary{
-      background:white;
+      background:rgba(255,255,255,.82);
       border-color:var(--line);
       color:var(--text);
     }
-    .btn-secondary:hover{border-color:#cbd5e1}
+    .btn-secondary:hover{border-color:#bfd2ea;transform:translateY(-2px)}
 
     .hero{
-      padding:86px 0 50px;
+      padding:86px 0 42px;
+      position:relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(6,182,212,.10), transparent 18%),
+        radial-gradient(circle at 80% 30%, rgba(124,58,237,.10), transparent 20%);
+      pointer-events:none;
     }
 
     .hero-grid{
+      position:relative;
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.08fr .92fr;
       gap:28px;
       align-items:center;
     }
@@ -123,99 +153,133 @@
       gap:8px;
       padding:8px 14px;
       border-radius:999px;
-      background:var(--soft);
+      background:rgba(37,99,235,.08);
       color:var(--primary);
+      border:1px solid rgba(37,99,235,.12);
       font-weight:700;
       margin-bottom:18px;
-      border:1px solid #dbeafe;
     }
 
     h1{
-      font-size:clamp(2.4rem, 5vw, 4.5rem);
-      line-height:1.05;
-      letter-spacing:-.04em;
+      font-size:clamp(2.5rem, 5.5vw, 4.9rem);
+      line-height:1.03;
+      letter-spacing:-.05em;
       margin-bottom:16px;
       max-width:12ch;
     }
 
-    h1 span{color:var(--primary)}
+    h1 span{
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
     .hero p{
       color:var(--muted);
-      font-size:1.06rem;
       max-width:58ch;
-      margin-bottom:24px;
+      font-size:1.05rem;
+      margin-bottom:26px;
     }
 
     .actions{
       display:flex;
       gap:14px;
       flex-wrap:wrap;
-      margin-bottom:26px;
     }
 
-    .panel{
-      background:var(--surface);
-      border:1px solid var(--line);
-      border-radius:28px;
-      box-shadow:var(--shadow);
+    .hero-card{
       padding:24px;
+      border-radius:30px;
+      position:relative;
+      overflow:hidden;
     }
 
-    .panel h3{
-      margin-bottom:12px;
-      font-size:1.15rem;
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:linear-gradient(135deg, rgba(37,99,235,.18), rgba(124,58,237,.14), rgba(6,182,212,.10));
+      opacity:.55;
+      pointer-events:none;
     }
 
-    .panel p{
-      color:var(--muted);
-      margin-bottom:14px;
+    .hero-card-inner{
+      position:relative;
+      border-radius:24px;
+      padding:22px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(219,231,245,.85);
     }
 
-    .tag{
+    .label{
       display:inline-block;
       padding:6px 10px;
       border-radius:999px;
-      background:#dcfce7;
-      color:#166534;
-      font-size:.82rem;
+      background:#ecfeff;
+      color:#0e7490;
+      font-size:.8rem;
       font-weight:700;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
 
-    .stats{
+    .workflow-mini{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .mini-item{
+      padding:14px 15px;
+      border-radius:18px;
+      background:linear-gradient(180deg, #fff, #f8fbff);
+      border:1px solid var(--line);
+    }
+
+    .mini-item h4{font-size:1rem;margin-bottom:4px}
+    .mini-item p{color:var(--muted);font-size:.92rem}
+
+    .floating{
+      margin-top:18px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:14px;
-      margin-top:18px;
     }
 
-    .stat{
-      background:var(--surface);
-      border:1px solid var(--line);
-      border-radius:18px;
+    .chip{
       padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.74);
+      border:1px solid rgba(219,231,245,.95);
       box-shadow:var(--shadow);
+      text-align:left;
     }
 
-    .stat strong{display:block;font-size:1.05rem;margin-bottom:6px}
-    .stat span{color:var(--muted);font-size:.92rem}
+    .chip strong{display:block;margin-bottom:4px}
+    .chip span{color:var(--muted);font-size:.92rem}
 
     .section{
-      padding:68px 0;
+      padding:70px 0;
+      position:relative;
     }
 
     .section-head{
-      margin-bottom:24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:18px;
+      margin-bottom:26px;
     }
 
     .section-head h2{
-      font-size:clamp(1.6rem, 2.5vw, 2.3rem);
+      font-size:clamp(1.6rem, 2.6vw, 2.35rem);
+      letter-spacing:-.03em;
       margin-bottom:8px;
     }
 
     .section-head p{
       color:var(--muted);
-      max-width:66ch;
+      max-width:64ch;
     }
 
     .grid{
@@ -223,76 +287,90 @@
       gap:18px;
     }
 
-    .cards-4{
-      grid-template-columns:repeat(4,1fr);
-    }
-
-    .cards-2{
-      grid-template-columns:repeat(2,1fr);
-    }
+    .cards-4{grid-template-columns:repeat(4,1fr)}
+    .cards-2{grid-template-columns:repeat(2,1fr)}
 
     .card{
-      background:var(--surface);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
       padding:22px;
+      border-radius:var(--radius);
+      background:var(--surface);
+      border:1px solid rgba(219,231,245,.92);
       box-shadow:var(--shadow);
       transition:.25s ease;
+      position:relative;
+      overflow:hidden;
     }
 
-    .card:hover{transform:translateY(-4px)}
-    .card h3{margin-bottom:8px;font-size:1.08rem}
-    .card p{color:var(--muted)}
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow2);
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      right:-40px;
+      bottom:-40px;
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(37,99,235,.12), transparent 68%);
+    }
+
     .badge{
-      display:inline-block;
+      display:inline-flex;
       padding:6px 10px;
       border-radius:999px;
-      background:var(--soft);
+      background:#eff6ff;
       color:var(--primary);
       font-size:.78rem;
-      font-weight:700;
+      font-weight:800;
       margin-bottom:12px;
     }
 
+    .card h3{margin-bottom:8px;font-size:1.08rem}
+    .card p{color:var(--muted);font-size:.95rem}
+
     .timeline{
       display:grid;
-      gap:16px;
+      gap:14px;
     }
 
     .step{
       display:flex;
       gap:16px;
       align-items:flex-start;
-      background:var(--surface);
-      border:1px solid var(--line);
-      border-radius:20px;
       padding:18px 20px;
+      border-radius:20px;
+      background:var(--surface);
+      border:1px solid rgba(219,231,245,.92);
       box-shadow:var(--shadow);
     }
 
     .num{
-      min-width:38px;
-      height:38px;
-      border-radius:12px;
-      background:var(--soft);
-      color:var(--primary);
+      min-width:40px;
+      height:40px;
+      border-radius:14px;
       display:grid;
       place-items:center;
+      color:white;
       font-weight:800;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 10px 20px rgba(37,99,235,.16);
     }
 
     .step h4{margin-bottom:4px}
     .step p{color:var(--muted)}
 
     .cta{
-      background:linear-gradient(135deg,#ffffff 0%, #eff6ff 100%);
-      border:1px solid var(--line);
-      border-radius:28px;
       padding:28px;
+      border-radius:30px;
+      background:linear-gradient(135deg, rgba(255,255,255,.92), rgba(239,246,255,.96));
+      border:1px solid rgba(219,231,245,.92);
       box-shadow:var(--shadow);
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       gap:18px;
     }
 
@@ -301,26 +379,30 @@
       margin-bottom:8px;
     }
 
-    .cta p{color:var(--muted);max-width:62ch}
+    .cta p{
+      color:var(--muted);
+      max-width:60ch;
+    }
 
     footer{
       padding:26px 0 38px;
       text-align:center;
       color:var(--muted);
-      border-top:1px solid var(--line);
+      border-top:1px solid rgba(219,231,245,.92);
     }
 
     @media (max-width: 1024px){
-      .hero-grid,.cards-4,.cards-2{grid-template-columns:1fr 1fr}
       nav ul{display:none}
-      .cta{flex-direction:column;align-items:flex-start}
+      .hero-grid,.cards-4,.cards-2{grid-template-columns:1fr 1fr}
+      .section-head,.cta{flex-direction:column;align-items:flex-start}
     }
 
     @media (max-width: 720px){
-      .hero-grid,.cards-4,.cards-2,.stats{grid-template-columns:1fr}
-      .hero{padding-top:52px}
-      .actions,.nav{gap:12px}
+      .hero-grid,.cards-4,.cards-2,.floating{grid-template-columns:1fr}
+      .hero{padding-top:54px}
+      .actions{flex-direction:column}
       .btn{width:100%}
+      .nav{gap:12px}
     }
   </style>
 </head>
@@ -328,16 +410,16 @@
 
 <header>
   <div class="container nav">
-    <div class="logo">
-      <div class="logo-box">CC</div>
+    <div class="brand">
+      <div class="brand-mark">CC</div>
       <span>CreatorConnect</span>
     </div>
     <nav>
       <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#workflow">Workflow</a></li>
-        <li><a href="#future">Future</a></li>
-        <li><a href="#ai">AI</a></li>
+        ><a href="#features">Features</a></li>
+        ><a href="#workflow">Workflow</a></li>
+        ><a href="#future">Future</a></li>
+        ><a href="#ai">AI</a></li>
       </ul>
     </nav>
     <a class="btn btn-secondary" href="#contact">Login</a>
@@ -348,10 +430,11 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <div class="eyebrow">🎬 Made for creators who want growth, not just editing</div>
-        <h1><span>Creator</span> support system for modern creators.</h1>
+        <div class="eyebrow">⚡ Modern creator platform</div>
+        <h1><span>Creator</span> support, built like the future.</h1>
         <p>
-          You shoot the content. We handle editing, ideas, workflow, review, growth support, and future AI tools.
+          CreatorConnect is not just editing. It is a full creator support system with editing,
+          workflow, idea support, growth help, and future AI tools.
         </p>
         <div class="actions">
           <a class="btn btn-primary" href="#contact">Get Started</a>
@@ -359,26 +442,42 @@
         </div>
       </div>
 
-      <div class="panel">
-        <span class="tag">Simple workflow</span>
-        <h3>How clients use CreatorConnect</h3>
-        <p>Upload project → editing starts → review changes → final approval.</p>
-        <p>Clean process, easy communication, and no confusing steps.</p>
+      <div class="hero-card glass">
+        <div class="hero-card-inner">
+          <span class="label">Live workflow</span>
+          <h3>Fast, structured, easy</h3>
+          <p>One clean process from upload to final approval.</p>
+
+          <div class="workflow-mini">
+            <div class="mini-item">
+              <h4>Submit project</h4>
+              <p>Upload raw footage and requirements.</p>
+            </div>
+            <div class="mini-item">
+              <h4>Editing begins</h4>
+              <p>In-house editors start working.</p>
+            </div>
+            <div class="mini-item">
+              <h4>Review & approve</h4>
+              <p>Client gives feedback and final approval.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="container stats">
-      <div class="stat">
+    <div class="container floating">
+      <div class="chip">
         <strong>Professional Editing</strong>
-        <span>High-quality final output</span>
+        <span>Polished final delivery</span>
       </div>
-      <div class="stat">
+      <div class="chip">
         <strong>In-house Team</strong>
-        <span>No freelancers, better control</span>
+        <span>Consistent quality control</span>
       </div>
-      <div class="stat">
+      <div class="chip">
         <strong>Growth Support</strong>
-        <span>Ideas, strategy, and scaling</span>
+        <span>Ideas + strategy + scaling</span>
       </div>
     </div>
   </section>
@@ -386,30 +485,32 @@
   <section class="section" id="features">
     <div class="container">
       <div class="section-head">
-        <h2>Core services</h2>
-        <p>Ye woh services hain jo CreatorConnect ko clearly define karti hain.</p>
+        <div>
+          <h2>Core services</h2>
+          <p>Simple cards, clear text, and better visual separation so everything feels premium.</p>
+        </div>
       </div>
 
       <div class="grid cards-4">
         <div class="card">
           <span class="badge">Main</span>
           <h3>Professional Video Editing</h3>
-          <p>Raw footage se polished final video.</p>
+          <p>Raw footage ko clean, polished, professional video me convert karte hain.</p>
         </div>
         <div class="card">
           <span class="badge">System</span>
           <h3>Managed Editing</h3>
-          <p>Trained in-house editors, consistent quality.</p>
+          <p>Freelancers nahi — trained in-house editors for consistent quality.</p>
         </div>
         <div class="card">
           <span class="badge">Workflow</span>
           <h3>Fast Process</h3>
-          <p>Easy submission and clear tracking.</p>
+          <p>Submission se delivery tak simple aur trackable workflow.</p>
         </div>
         <div class="card">
           <span class="badge">Delivery</span>
           <h3>Review System</h3>
-          <p>Approve or request changes easily.</p>
+          <p>Changes request karo, final approval do, aur kaam complete.</p>
         </div>
       </div>
     </div>
@@ -418,8 +519,10 @@
   <section class="section" id="workflow">
     <div class="container">
       <div class="section-head">
-        <h2>How it works</h2>
-        <p>Simple steps. No clutter. Easy to understand.</p>
+        <div>
+          <h2>How it works</h2>
+          <p>Short steps, no clutter, easy to scan.</p>
+        </div>
       </div>
 
       <div class="timeline">
@@ -427,28 +530,28 @@
           <div class="num">1</div>
           <div>
             <h4>Submit project</h4>
-            <p>Client footage aur requirements upload karta hai.</p>
+            <p>Client footage aur brief upload karta hai.</p>
           </div>
         </div>
         <div class="step">
           <div class="num">2</div>
           <div>
             <h4>Editing begins</h4>
-            <p>Team content edit karna start karti hai.</p>
+            <p>Team content par kaam start karti hai.</p>
           </div>
         </div>
         <div class="step">
           <div class="num">3</div>
           <div>
-            <h4>Review progress</h4>
-            <p>Client progress dekh sakta hai aur feedback de sakta hai.</p>
+            <h4>Track progress</h4>
+            <p>Client process dekh sakta hai aur update le sakta hai.</p>
           </div>
         </div>
         <div class="step">
           <div class="num">4</div>
           <div>
-            <h4>Approve final video</h4>
-            <p>Changes ke baad final delivery hoti hai.</p>
+            <h4>Review & approve</h4>
+            <p>Feedback ke baad final video deliver hota hai.</p>
           </div>
         </div>
       </div>
@@ -458,30 +561,32 @@
   <section class="section" id="future">
     <div class="container">
       <div class="section-head">
-        <h2>Future features</h2>
-        <p>Service ko ek complete creator ecosystem me convert karne wale features.</p>
+        <div>
+          <h2>Future features</h2>
+          <p>Ye CreatorConnect ko ek complete growth ecosystem banayenge.</p>
+        </div>
       </div>
 
       <div class="grid cards-2">
         <div class="card">
-          <span class="badge">Next</span>
+          <span class="badge">Future</span>
           <h3>Creator Counseling</h3>
-          <p>What content to make, which niche to choose, and how to grow.</p>
+          <p>Kaunsa content banana hai, kis niche me jana hai, aur kaise grow karna hai.</p>
         </div>
         <div class="card">
-          <span class="badge">Next</span>
+          <span class="badge">Future</span>
           <h3>Video Idea System</h3>
-          <p>Trending ideas, niche suggestions, and planning support.</p>
+          <p>Trending ideas aur niche-wise content suggestions.</p>
         </div>
         <div class="card">
-          <span class="badge">Next</span>
+          <span class="badge">Future</span>
           <h3>Channel Growth Support</h3>
-          <p>Strategy, optimization, and consistency planning.</p>
+          <p>Strategy, optimization, aur consistency planning.</p>
         </div>
         <div class="card">
-          <span class="badge">Next</span>
+          <span class="badge">Future</span>
           <h3>Full Channel Management</h3>
-          <p>Creator only shoots. Everything else handled by your team.</p>
+          <p>Creator sirf shoot kare, baaki sab team handle kare.</p>
         </div>
       </div>
     </div>
@@ -490,14 +595,16 @@
   <section class="section" id="ai">
     <div class="container">
       <div class="section-head">
-        <h2>AI features</h2>
-        <p>Simple future tools that make the platform smarter and easier.</p>
+        <div>
+          <h2>AI features</h2>
+          <p>Simple but futuristic tools that add smart automation.</p>
+        </div>
       </div>
 
       <div class="grid cards-4">
-        <div class="card"><h3>Idea generator</h3><p>Fast content ideation.</p></div>
-        <div class="card"><h3>Smart suggestions</h3><p>Hooks, titles, and content help.</p></div>
-        <div class="card"><h3>Automation</h3><p>Less manual work, more speed.</p></div>
+        <div class="card"><h3>Idea generator</h3><p>Instant content ideas.</p></div>
+        <div class="card"><h3>Smart suggestions</h3><p>Better hooks and titles.</p></div>
+        <div class="card"><h3>Automation</h3><p>Less manual work.</p></div>
         <div class="card"><h3>Analysis</h3><p>See performance clearly.</p></div>
       </div>
     </div>
@@ -507,8 +614,8 @@
     <div class="container">
       <div class="cta">
         <div>
-          <h3>CreatorConnect is a complete support system.</h3>
-          <p>It is not just editing. It is editing + ideas + growth + workflow + AI, all in one place.</p>
+          <h3>Complete support system.</h3>
+          <p>Editing, ideas, growth, workflow, and AI — all in one futuristic platform.</p>
         </div>
         <a class="btn btn-primary" href="#">Start Now</a>
       </div>

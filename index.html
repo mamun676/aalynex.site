@@ -138,19 +138,34 @@
       height:64px;
       display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
+
+    /* ── LOGO — PNG IMAGE SUPPORT ── */
     .logo {
       display:flex; align-items:center; gap:10px;
       font-family:'Bricolage Grotesque',sans-serif;
       font-weight:800; font-size:1.05rem; letter-spacing:-.03em;
+      text-decoration:none; color:var(--ink);
     }
-    .logo-icon {
-      width:36px; height:36px; border-radius:10px;
-      background:var(--ink);
-      display:grid; place-items:center;
-      color:white; font-size:.78rem; font-weight:800;
-      box-shadow: var(--shadow-m);
+    .logo-img-wrap {
+      width:36px; height:36px;
+      border-radius:10px;
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
       flex-shrink:0;
+      box-shadow: var(--shadow-m);
+      background: var(--ink);
     }
+    .logo-img-wrap img {
+      width:100%; height:110%;
+      object-fit:contain;
+      display:block;
+    }
+    .logo-text {
+      font-family:'Bricolage Grotesque',sans-serif;
+      font-weight:800; font-size:1.05rem; letter-spacing:-.03em;
+      color:var(--ink);
+    }
+
     .nav-links { list-style:none; display:flex; gap:4px; }
     .nav-links a {
       padding:7px 14px; border-radius:8px;
@@ -159,6 +174,64 @@
     }
     .nav-links a:hover { color:var(--ink); background:rgba(17,17,25,.05); }
     .nav-cta { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+
+    /* ── SVG ICON SYSTEM ── */
+    .icon {
+      display:inline-flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .icon svg {
+      width:20px; height:20px;
+      stroke-width:1.75;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      fill:none;
+      transition: stroke .2s ease, transform .2s ease;
+    }
+    .icon-sm svg { width:16px; height:16px; }
+    .icon-md svg { width:22px; height:22px; }
+    .icon-lg svg { width:28px; height:28px; }
+
+    /* Badge icon */
+    .badge-icon {
+      width:26px; height:26px; border-radius:6px;
+      background:linear-gradient(135deg, var(--indigo), var(--violet));
+      display:grid; place-items:center;
+      flex-shrink:0;
+    }
+    .badge-icon svg { width:14px; height:14px; stroke:white; fill:none; stroke-width:2; }
+
+    /* Chip icons */
+    .chip .icon svg { width:15px; height:15px; stroke-width:2; }
+
+    /* Step bubble icons */
+    .step-bubble .icon svg { width:24px; height:24px; stroke-width:1.75; }
+    .step-card:hover .step-bubble .icon svg { transform:scale(1.08); }
+
+    /* Value icons */
+    .value-icon .icon svg { width:22px; height:22px; stroke-width:1.75; }
+    .vi-a .icon svg { stroke:var(--indigo); }
+    .vi-b .icon svg { stroke:var(--violet); }
+    .vi-c .icon svg { stroke:var(--green); }
+
+    /* Future icons */
+    .future-icon .icon svg { width:26px; height:26px; stroke-width:1.6; }
+    .fc-vio .future-icon .icon svg { stroke:var(--violet); }
+    .fc-ind .future-icon .icon svg { stroke:var(--indigo); }
+    .fc-grn .future-icon .icon svg { stroke:var(--green); }
+    .fc-sky .future-icon .icon svg { stroke:var(--sky); }
+
+    /* AI feat icons */
+    .ai-feat-icon .icon svg { width:18px; height:18px; stroke-width:1.8; stroke:white; }
+
+    /* Search btn icon */
+    .search-freelancers-btn .icon svg { stroke:white; width:17px; height:17px; stroke-width:2; }
+
+    /* Trust check */
+    .trust-check .icon svg { width:10px; height:10px; stroke:var(--green); stroke-width:2.5; }
+
+    /* AI tag icons */
+    .ai-tag .icon svg { width:12px; height:12px; stroke-width:2; stroke:#94a3b8; }
 
     /* ── HERO ── */
     .hero { padding:72px 0 0; position:relative; overflow:hidden; }
@@ -194,12 +267,6 @@
       margin-bottom:28px;
       animation: fade-up .6s ease both;
     }
-    .badge-icon {
-      width:26px; height:26px; border-radius:6px;
-      background:linear-gradient(135deg, var(--indigo), var(--violet));
-      display:grid; place-items:center; font-size:.8rem;
-      flex-shrink:0;
-    }
     h1 { animation:fade-up .65s .1s ease both; }
     .h1-plain  { display:block; color:var(--ink); }
     .h1-accent {
@@ -224,7 +291,7 @@
     .trust-check {
       width:18px; height:18px; border-radius:50%;
       background:var(--green-bg); border:1px solid #bbf7d0;
-      display:grid; place-items:center; font-size:.65rem; color:var(--green);
+      display:grid; place-items:center;
       flex-shrink:0;
     }
 
@@ -265,7 +332,7 @@
       box-shadow: 0 4px 12px rgba(27,206,108,0.25);
       border: 1px solid rgba(255,255,255,0.15);
       transition: all 0.25s ease;
-      gap: 6px;
+      gap: 8px;
       margin-bottom: 4px;
     }
     .search-freelancers-btn:hover {
@@ -273,9 +340,7 @@
       transform: translateY(-2px);
       background: #18b860;
     }
-    .search-freelancers-btn:active {
-      transform: translateY(0);
-    }
+    .search-freelancers-btn:active { transform: translateY(0); }
 
     .pc-footer {
       padding:14px 18px; border-top:1px solid var(--line);
@@ -357,7 +422,7 @@
     .value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-m); }
     .value-icon {
       width:48px; height:48px; border-radius:13px;
-      display:grid; place-items:center; font-size:1.3rem; margin-bottom:14px;
+      display:grid; place-items:center; margin-bottom:14px;
     }
     .vi-a { background:var(--ind-bg); }
     .vi-b { background:var(--vio-bg); }
@@ -390,8 +455,8 @@
       background:var(--white);
       box-shadow:var(--shadow-s);
       transition:.28s;
-      font-size:1.35rem;
     }
+    .step-bubble .icon svg { stroke:var(--indigo); }
     .step-card:hover .step-bubble {
       border-color:var(--indigo);
       box-shadow:0 0 0 4px rgba(79,70,229,.1), var(--shadow-m);
@@ -421,7 +486,15 @@
     .fc-ind:hover { border-color:#c7d2fe; }
     .fc-grn:hover { border-color:#bbf7d0; }
     .fc-sky:hover { border-color:#bae6fd; }
-    .future-icon { font-size:1.9rem; margin-bottom:16px; display:block; }
+    .future-icon {
+      width:46px; height:46px; border-radius:13px;
+      display:grid; place-items:center;
+      margin-bottom:16px;
+    }
+    .fc-vio .future-icon { background:var(--vio-bg); }
+    .fc-ind .future-icon { background:var(--ind-bg); }
+    .fc-grn .future-icon { background:var(--green-bg); }
+    .fc-sky .future-icon { background:var(--sky-bg); }
     .future-card h3 { font-size:1.22rem; font-weight:800; margin-bottom:9px; }
     .future-card p  { color:var(--muted); font-size:.91rem; line-height:1.65; }
     .future-list { list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:7px; }
@@ -470,7 +543,7 @@
     .ai-feat:hover { background:rgba(255,255,255,.08); border-color:rgba(129,140,248,.25); }
     .ai-feat-icon {
       width:36px; height:36px; border-radius:11px;
-      display:grid; place-items:center; font-size:.95rem; flex-shrink:0;
+      display:grid; place-items:center; flex-shrink:0;
     }
     .aif-a{background:rgba(99,102,241,.2);}
     .aif-b{background:rgba(124,58,237,.2);}
@@ -509,6 +582,7 @@
     .ai-divider { height:1px; background:rgba(255,255,255,.08); margin:16px 0; }
     .ai-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
     .ai-tag {
+      display:inline-flex; align-items:center; gap:5px;
       padding:5px 11px; border-radius:999px;
       background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
       font-size:.77rem; color:#cbd5e1; font-weight:500;
@@ -549,9 +623,11 @@
     }
     .footer-logo-mark {
       width:30px; height:30px; border-radius:8px;
-      background:var(--ink);
-      display:grid; place-items:center;
-      color:white; font-size:.7rem; font-weight:800;
+      overflow:hidden; display:flex; align-items:center; justify-content:center;
+      background:var(--ink); flex-shrink:0;
+    }
+    .footer-logo-mark img {
+      width:100%; height:80%; object-fit:contain;
     }
     .footer-links { display:flex; gap:24px; }
     .footer-links a { font-size:.86rem; color:var(--muted); font-weight:500; transition:.18s; }
@@ -564,11 +640,7 @@
       to   { opacity:1; transform:translateY(0); }
     }
 
-    /* ════════════════════════════════════════
-       MOBILE / RESPONSIVE — IMPROVED
-    ════════════════════════════════════════ */
-
-    /* Tablets */
+    /* ── RESPONSIVE ── */
     @media (max-width:1060px) {
       .services-grid { grid-template-columns:repeat(2,1fr); }
       .hero-inner { grid-template-columns:1fr; gap:36px; }
@@ -576,8 +648,6 @@
       .ai-inner   { grid-template-columns:1fr; padding:48px 36px; gap:32px; }
       .nav-links  { display:none; }
     }
-
-    /* Phones */
     @media (max-width:780px) {
       .future-grid  { grid-template-columns:1fr; }
       .value-grid   { grid-template-columns:1fr; }
@@ -586,19 +656,13 @@
       .cta-box { grid-template-columns:1fr; padding:36px 24px; gap:28px; }
       .footer-links  { display:none; }
       .footer-inner  { flex-direction:column; text-align:center; gap:10px; }
-
-      /* hero improvements on mobile */
       .hero { padding:52px 0 0; }
       .hero-sub { font-size:.97rem; }
       .hero-trust { gap:10px; }
       .trust-div { display:none; }
-
-      /* product card on tablet/phone */
       .product-card { max-width:100%; }
       .pc-footer { grid-template-columns:repeat(3,1fr); }
     }
-
-    /* Small phones */
     @media (max-width:560px) {
       .container { width: min(100% - 24px, var(--max)); }
       .services-grid  { grid-template-columns:1fr; }
@@ -606,39 +670,21 @@
       .ai-inner { padding:28px 20px; }
       .section  { padding:56px 0; }
       .hero     { padding:44px 0 0; }
-
-      /* Full-width action buttons on mobile */
       .hero-actions { flex-direction:column; gap:10px; }
       .hero-actions .btn  { width:100%; }
-
-      /* Hide secondary nav button on tiny screens */
       .nav-cta .btn-ghost { display:none; }
       .nav-wrap { height:58px; }
-
-      /* Card footer: 3 cols still fine, shrink text */
       .pc-footer { grid-template-columns:repeat(3,1fr); gap:6px; }
       .mini-stat strong { font-size:1.05rem; }
       .mini-stat span   { font-size:.68rem; }
-
-      /* Chips wrap nicely */
       .chips-row { gap:8px; }
       .chip      { font-size:.79rem; padding:7px 12px; }
-
-      /* Future cards */
       .future-card { padding:24px 20px; }
-
-      /* CTA */
       .cta-section { padding:20px 0 64px; }
-
-      /* Sections */
       .section-header { margin-bottom:36px; }
-
-      /* AI tags wrap */
       .ai-tags { gap:6px; }
       .ai-tag  { font-size:.73rem; padding:4px 9px; }
     }
-
-    /* Extra small (320px) */
     @media (max-width:380px) {
       h1 { font-size:2.1rem; }
       h2 { font-size:1.55rem; }
@@ -654,10 +700,13 @@
 <!-- ═══════ HEADER ═══════ -->
 <header>
   <div class="container nav-wrap">
-    <div class="logo">
-      <div class="logo-icon">CC</div>
-      CreatorConnect
-    </div>
+    <a class="logo" href="#">
+      <div class="logo-img-wrap">
+        <!-- REPLACE logo.png with your actual PNG filename -->
+        <img src="aalynex-logo.png" alt="Aalynex Logo" onerror="this.parentElement.innerHTML='<svg width=\'20\' height=\'10\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'white\' stroke-width=\'0\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><polygon points=\'12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\'></polygon></svg>';" />
+      </div>
+      <span class="logo-text">Aalynex</span>
+    </a>
     <nav>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
@@ -667,7 +716,6 @@
       </ul>
     </nav>
     <div class="nav-cta">
-     
       <a class="btn btn-primary btn-sm" href="https://www.alynex.store/" target="_blank" rel="noopener noreferrer">Get Started</a>
     </div>
   </div>
@@ -682,12 +730,15 @@
 
       <div class="hero-left">
         <div class="hero-badge">
-          <div class="badge-icon">🎬</div>
+          <div class="badge-icon">
+            <!-- Video / film icon -->
+            <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
           Complete Creator Support System — v1.0
         </div>
 
         <h1>
-          <span class="h1-plain">Build, Grow & ,</span>
+          <span class="h1-plain">Build, Grow &amp; ,</span>
           <span class="h1-accent">Scale Your Brand.</span>
         </h1>
 
@@ -697,29 +748,40 @@ A complete ecosystem to help creators scale effortlessly
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-indigo" href="https://www.alynex.store/" target="_blank" rel="noopener noreferrer">Start for Free →</a>
+          <a class="btn btn-indigo" href="https://www.alynex.store/" target="_blank" rel="noopener noreferrer">
+            Start for Free
+            <span class="icon icon-sm">
+              <svg viewBox="0 0 24 24" stroke="white"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
           <a class="btn btn-ghost" href="#services">Explore Services</a>
         </div>
 
         <div class="hero-trust">
           <div class="trust-item">
-            <div class="trust-check">✓</div>
-             freelancers
+            <div class="trust-check">
+              <span class="icon"><svg viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </div>
+            freelancers
           </div>
           <div class="trust-div"></div>
           <div class="trust-item">
-            <div class="trust-check">✓</div>
+            <div class="trust-check">
+              <span class="icon"><svg viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </div>
             Fast turnaround
           </div>
           <div class="trust-div"></div>
           <div class="trust-item">
-            <div class="trust-check">✓</div>
+            <div class="trust-check">
+              <span class="icon"><svg viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </div>
             Growth focused
           </div>
         </div>
       </div>
 
-      <!-- Product Preview Card — FIXED STRUCTURE -->
+      <!-- Product Preview Card -->
       <div class="hero-right">
         <div class="product-card">
           <div class="pc-header">
@@ -732,14 +794,15 @@ A complete ecosystem to help creators scale effortlessly
             <span class="pill pill-ind">freelancer</span>
           </div>
 
-          <!-- FIXED: clean body with properly structured search button -->
           <div class="pc-body">
-            <a
-              href="https://www.alynex.store/"
-              target="_blank"
-              class="search-freelancers-btn"
-            >
-              🔍 search freelancers →
+            <a href="https://www.alynex.store/" target="_blank" class="search-freelancers-btn">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              search freelancers
+              <span class="icon icon-sm">
+                <svg viewBox="0 0 24 24" stroke="white"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
             </a>
           </div>
 
@@ -753,24 +816,38 @@ A complete ecosystem to help creators scale effortlessly
               <span>Quality Check</span>
             </div>
             <div class="mini-stat">
-              <strong>∞</strong>
+              <strong>&#8734;</strong>
               <span>Revisions</span>
             </div>
           </div>
         </div>
       </div>
-      <!-- end hero-right -->
 
     </div><!-- end hero-inner -->
 
     <!-- Chips -->
     <div class="hero-chips">
       <div class="chips-row">
-        <div class="chip" style="animation-delay:.1s">🎬 Professional Editing</div>
-        <div class="chip" style="animation-delay:.18s">👥 Best Freelancer</div>
-        <div class="chip" style="animation-delay:.26s">📈 Growth Strategy</div>
-        <div class="chip" style="animation-delay:.34s">🤖 AI-Powered Tools</div>
-        <div class="chip" style="animation-delay:.42s">⚡ Fast Workflow</div>
+        <div class="chip" style="animation-delay:.1s">
+          <span class="icon"><svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+          Professional Editing
+        </div>
+        <div class="chip" style="animation-delay:.18s">
+          <span class="icon"><svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          Best Freelancer
+        </div>
+        <div class="chip" style="animation-delay:.26s">
+          <span class="icon"><svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+          Growth Strategy
+        </div>
+        <div class="chip" style="animation-delay:.34s">
+          <span class="icon"><svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="var(--indigo)"/></svg></span>
+          AI-Powered Tools
+        </div>
+        <div class="chip" style="animation-delay:.42s">
+          <span class="icon"><svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          Fast Workflow
+        </div>
       </div>
     </div>
 
@@ -810,24 +887,36 @@ A complete ecosystem to help creators scale effortlessly
       <div class="service-card">
         <div class="service-num">04</div>
         <div class="service-tag"><span class="pill pill-sky">Delivery</span></div>
-        <h3>Smart Delivery & Review</h3>
+        <h3>Smart Delivery &amp; Review</h3>
         <p>Receive your edited videos, review instantly, request changes, and approve — all in one seamless platform.</p>
       </div>
     </div>
 
     <div class="value-grid">
       <div class="value-card">
-        <div class="value-icon vi-a">🎯</div>
+        <div class="value-icon vi-a">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg>
+          </span>
+        </div>
         <h3>More Than Just Editing</h3>
         <p>A complete support system — from editing and ideas to strategy and management. You create, we handle the rest.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon vi-b">🏆</div>
+        <div class="value-icon vi-b">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--violet)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </span>
+        </div>
         <h3>In-house Quality</h3>
         <p>Not just a freelance marketplace — our trained in-house editors ensure consistent, high-quality results with strict quality control.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon vi-c">📊</div>
+        <div class="value-icon vi-c">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--green)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </span>
+        </div>
         <h3>Growth Focused</h3>
         <p>More than just videos — we help you grow with strategy, insights, and continuous support for long-term success.</p>
       </div>
@@ -850,22 +939,38 @@ A complete ecosystem to help creators scale effortlessly
       <div class="wf-connector"></div>
       <div class="wf-steps-grid">
         <div class="step-card">
-          <div class="step-bubble">📤</div>
+          <div class="step-bubble">
+            <span class="icon icon-md">
+              <svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </span>
+          </div>
           <h4>Submit Project</h4>
           <p>Upload your raw footage and provide clear requirements to get started.</p>
         </div>
         <div class="step-card">
-          <div class="step-bubble">✂️</div>
+          <div class="step-bubble">
+            <span class="icon icon-md">
+              <svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </span>
+          </div>
           <h4>Editing Begins</h4>
           <p>A skilled editor is assigned to your project and begins working on your content.</p>
         </div>
         <div class="step-card">
-          <div class="step-bubble">👁️</div>
-          <h4>Review & Feedback</h4>
+          <div class="step-bubble">
+            <span class="icon icon-md">
+              <svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+          </div>
+          <h4>Review &amp; Feedback</h4>
           <p>Review your draft, share feedback, and request changes until it meets your expectations.</p>
         </div>
         <div class="step-card">
-          <div class="step-bubble">🚀</div>
+          <div class="step-bubble">
+            <span class="icon icon-md">
+              <svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </span>
+          </div>
           <h4>Final Delivery</h4>
           <p>Receive your finalized video, ready to download and publish — and rate your editor based on your experience.</p>
         </div>
@@ -887,7 +992,11 @@ A complete ecosystem to help creators scale effortlessly
 
     <div class="future-grid">
       <div class="future-card fc-vio">
-        <span class="future-icon">🧠</span>
+        <div class="future-icon">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--violet)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          </span>
+        </div>
         <span class="pill pill-vio" style="margin-bottom:12px;">Creator Support</span>
         <h3>Creator Guidance</h3>
         <p>Get expert guidance to grow your channel with clarity and confidence — no more guesswork.</p>
@@ -903,14 +1012,18 @@ A complete ecosystem to help creators scale effortlessly
       </div>
 
       <div class="future-card fc-ind">
-        <span class="future-icon">💡</span>
+        <div class="future-icon">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--indigo)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </span>
+        </div>
         <span class="pill pill-ind" style="margin-bottom:12px;">Content Ideas</span>
         <h3>AI-Powered Idea System</h3>
         <p>Never run out of ideas — powered by AI and data to help you plan and grow smarter.</p>
         <ul class="future-list">
           <li>Trending ideas based on your niche</li>
           <li>Weekly content planning</li>
-          <li>Hook aur title suggestions</li>
+          <li>Hook and title suggestions</li>
         </ul>
         <div class="future-foot">
           <span class="pill pill-amb">Coming Soon</span>
@@ -919,7 +1032,11 @@ A complete ecosystem to help creators scale effortlessly
       </div>
 
       <div class="future-card fc-grn">
-        <span class="future-icon">📈</span>
+        <div class="future-icon">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--green)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </span>
+        </div>
         <span class="pill pill-grn" style="margin-bottom:12px;">Growth</span>
         <h3>Channel Growth Support</h3>
         <p>A complete system to grow your channel with clear strategy and consistent execution.</p>
@@ -935,7 +1052,11 @@ A complete ecosystem to help creators scale effortlessly
       </div>
 
       <div class="future-card fc-sky">
-        <span class="future-icon">📱</span>
+        <div class="future-icon">
+          <span class="icon icon-md">
+            <svg viewBox="0 0 24 24" stroke="var(--sky)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>
+          </span>
+        </div>
         <span class="pill pill-sky" style="margin-bottom:12px;">Full Management</span>
         <h3>Full Channel Management</h3>
         <p>Focus on creating content while we handle everything from editing to publishing and growth.</p>
@@ -972,31 +1093,47 @@ A complete ecosystem to help creators scale effortlessly
           <p class="section-desc">Automate repetitive tasks, gain clear insights, and improve performance — all powered by AI.</p>
           <div class="ai-feats">
             <div class="ai-feat">
-              <div class="ai-feat-icon aif-a">🤖</div>
+              <div class="ai-feat-icon aif-a">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </span>
+              </div>
               <div>
                 <strong>AI Idea Generator</strong>
                 <span>Generate content ideas instantly based on your niche — never run out of ideas again.</span>
               </div>
             </div>
             <div class="ai-feat">
-              <div class="ai-feat-icon aif-b">✨</div>
+              <div class="ai-feat-icon aif-b">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </span>
+              </div>
               <div>
-                <strong>Smart Suggestions</strong>
-                <span>Get AI-powered suggestions for hooks, titles, and thumbnails that improve performance.</span>
+                <strong>Smart Title &amp; Hook Writer</strong>
+                <span>Craft high-performing titles and hooks that drive clicks and watch time.</span>
               </div>
             </div>
             <div class="ai-feat">
-              <div class="ai-feat-icon aif-c">⚙️</div>
+              <div class="ai-feat-icon aif-c">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </span>
+              </div>
               <div>
-                <strong>Automation Tools</strong>
-                <span>Automate scheduling, captions, and descriptions — saving time and effort.</span>
+                <strong>Performance Analytics</strong>
+                <span>Track key metrics and get actionable AI-driven insights to grow faster.</span>
               </div>
             </div>
             <div class="ai-feat">
-              <div class="ai-feat-icon aif-d">📊</div>
+              <div class="ai-feat-icon aif-d">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                </span>
+              </div>
               <div>
-                <strong>Performance Analysis</strong>
-                <span>Get clear insights into what’s working and what’s not — and improve your content strategy.</span>
+                <strong>Auto-Distribution</strong>
+                <span>Automatically publish and schedule content across all platforms seamlessly.</span>
               </div>
             </div>
           </div>
@@ -1005,35 +1142,49 @@ A complete ecosystem to help creators scale effortlessly
         <div class="ai-right">
           <div class="ai-visual">
             <div class="ai-panel-head">
-              <div class="ai-panel-title">AI Dashboard</div>
-              <div class="ai-live"><div class="ai-live-dot"></div>Live</div>
+              <span class="ai-panel-title">Creator Score</span>
+              <span class="ai-live"><div class="ai-live-dot"></div>Live</span>
             </div>
             <div class="bar-list">
               <div>
-                <div class="bar-meta"><span>Content Quality Score</span><strong>94%</strong></div>
+                <div class="bar-meta"><span>Content Quality</span><strong>94%</strong></div>
                 <div class="bar-track"><div class="bar-fill bf-ind" style="width:94%"></div></div>
               </div>
               <div>
-                <div class="bar-meta"><span>Audience Retention</span><strong>81%</strong></div>
-                <div class="bar-track"><div class="bar-fill bf-vio" style="width:81%"></div></div>
+                <div class="bar-meta"><span>Audience Growth</span><strong>87%</strong></div>
+                <div class="bar-track"><div class="bar-fill bf-vio" style="width:87%"></div></div>
               </div>
               <div>
-                <div class="bar-meta"><span>Channel Growth Rate</span><strong>73%</strong></div>
-                <div class="bar-track"><div class="bar-fill bf-grn" style="width:73%"></div></div>
+                <div class="bar-meta"><span>Engagement Rate</span><strong>79%</strong></div>
+                <div class="bar-track"><div class="bar-fill bf-grn" style="width:79%"></div></div>
               </div>
               <div>
-                <div class="bar-meta"><span>Automation Coverage</span><strong>58%</strong></div>
-                <div class="bar-track"><div class="bar-fill bf-sky" style="width:58%"></div></div>
+                <div class="bar-meta"><span>SEO Performance</span><strong>91%</strong></div>
+                <div class="bar-track"><div class="bar-fill bf-sky" style="width:91%"></div></div>
               </div>
             </div>
             <div class="ai-divider"></div>
-            <div class="ai-panel-title" style="margin-bottom:10px;">AI Suggestions</div>
             <div class="ai-tags">
-              <div class="ai-tag">💡 Post Tuesday 8PM</div>
-              <div class="ai-tag">🎯 Hook in first 3s</div>
-              <div class="ai-tag">📌 Add chapters</div>
-              <div class="ai-tag">🔥 Trending: AI Tools</div>
-              <div class="ai-tag">✂️ Trim outro by 10s</div>
+              <span class="ai-tag">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                Trending Niche
+              </span>
+              <span class="ai-tag">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                Best Post Time
+              </span>
+              <span class="ai-tag">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
+                Hook Optimizer
+              </span>
+              <span class="ai-tag">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></span>
+                Growth Mode
+              </span>
+              <span class="ai-tag">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
+                Auto Edit
+              </span>
             </div>
           </div>
         </div>
@@ -1042,21 +1193,30 @@ A complete ecosystem to help creators scale effortlessly
   </div>
 </section>
 
+<div class="wave-div"></div>
+
 <!-- ═══════ CTA ═══════ -->
-<section class="cta-section" id="contact">
+<section class="cta-section">
   <div class="container">
     <div class="cta-box">
-      <div>
-        <div class="overline"><div class="overline-dot"></div>Get Started Today</div>
-        <h2>Ready to take your content<br>to the next level?</h2>
-        <p style="margin-top:10px;">
-          Join CreatorConnect — get editing, ideas, growth strategy, and AI tools all in one place. Focus on creating, we’ll handle the rest.
-        </p>
+      <div class="cta-left">
+        <h2>Ready to scale your creator journey?</h2>
+        <p>Join creators who are growing faster with professional editing, AI tools, and expert support — all in one place.</p>
       </div>
       <div class="cta-right">
-        <a class="btn btn-indigo" href="https://www.alynex.store/" target="_blank" rel="noopener noreferrer">Start for Free →</a>
-        <a class="btn btn-ghost" href="#">know more</a>
-        <div class="cta-note">No credit card required · Cancel anytime</div>
+        <a class="btn btn-indigo" href="https://www.alynex.store/" target="_blank" rel="noopener noreferrer">
+          <span class="icon icon-sm">
+            <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </span>
+          Get Started Free
+        </a>
+        <a class="btn btn-ghost" href="#services">
+          <span class="icon icon-sm">
+            <svg viewBox="0 0 24 24" stroke="var(--ink)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          Explore Services
+        </a>
+        <p class="cta-note">No credit card required · Free to start</p>
       </div>
     </div>
   </div>
@@ -1066,17 +1226,19 @@ A complete ecosystem to help creators scale effortlessly
 <footer>
   <div class="container footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-mark">CC</div>
-      CreatorConnect
+      <div class="footer-logo-mark">
+        <!-- Same logo PNG used in footer, smaller size -->
+        <img src="aalynex-logo.png" class="logo-img" draggable="false" alt="Logo">
+      </div>
+      Aalynex
     </div>
     <div class="footer-links">
       <a href="#services">Services</a>
       <a href="#workflow">Workflow</a>
       <a href="#future">Future</a>
       <a href="#ai">AI Tools</a>
-      <a href="#contact">Contact</a>
     </div>
-    <div class="footer-copy">© 2026 CreatorConnect — Built for Creators</div>
+    <p class="footer-copy">&copy; 2026 Aalynex. All rights reserved.</p>
   </div>
 </footer>
 
